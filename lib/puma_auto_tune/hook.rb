@@ -42,6 +42,7 @@ module PumaAutoTune
       options["current_cluster_size"] = @resource.workers.size
       options["max_worker_limit"]     = PumaAutoTune.max_worker_limit
       options.each { |k, v| msg << "measure#puma.#{k.to_s.downcase}=#{v}" }
+      File.open('/tmp/puma_auto_tune.out', 'a') { |f| f.write(msg.join(" "))}
       puts msg.join(" ")
     end
 
